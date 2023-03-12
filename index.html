@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon-32x32.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+    <title>IP Adress Tracker</title>
+</head>
+<body>
+    <header>
+        <p class="author">
+            Challenge by <a href="https://www.frontendmentor.io/home">
+            Frontend Mentor</a>.<br /> Coded by <a href="https://github.com/JGdmd">JGdmd</a>
+        </p>
+        <h1>IP Adress Tracker</h1>
+        <form action="" method="GET">
+            <div class="input-icon">
+                <input id="ipInput" type="text" placeholder="Search for any IP Address or domain" required autofocus>
+                <span id="button">></span>
+            </div>
+        </form>
+        <div class="info-address visible">
+            <span id="cross">&#10060;</span>
+            <div class="bar">
+                <h2 class="info-title">ip address</h2>
+                <span id="ip"></span>
+            </div>
+            <div class="bar">
+                <h2 class="info-title">location</h2>
+                <span id="location"></span>
+            </div>
+            <div class="bar">
+                <h2 class="info-title">timezone</h2>
+                <span id="timezone"></span>
+            </div>
+            <div class="bar">
+                <h2 class="info-title">isp</h2>
+                <span id="isp"></span>
+            </div>
+        </div>
+    </header>
+    <div id="map">
+
+    </div>
+<script src="tracker.js"></script>
+</body>
+</html>
