@@ -1,6 +1,6 @@
 let button = document.getElementById('button');
 let inputIp = document.getElementById('ipInput');
-let apiAsk = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&ipAddress=';
+let apiAsk = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX';
 let apiOnLoad = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&ipAddress=8.8.8.8';
 let ip = document.getElementById('ip');
 let locationIp = document.getElementById('location');
@@ -13,10 +13,20 @@ let cross = document.getElementById('cross');
 let tokenPublic = "pk.eyJ1IjoiZGV2ZXhwbG9yaXMiLCJhIjoiY2xmNWllbjltMWNtazNybGp0OWd5MWpoaiJ9.EB5SRwYcg5M_gbfHF5eVPA";
 function SearchIp(url) {
     if (url !== apiOnLoad) {
-        url = apiAsk + inputIp.value;
+        url = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&ipAddress=' + inputIp.value;
     }
-    fetch(url)
-        .then(response => response.json())
+    fetch(url).then(response => {
+        console.log(response);
+        if (response.ok) {
+            return response.json();
+        } else {
+            fetch('https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&domain=' + inputIp.value).then(response => {
+                if (response.ok) {
+                    return response.json();
+                } throw new Error('Try Again');
+            })
+        }
+    })
         .then(data => {
             ip.innerText = data.ip;
             locationIp.innerText = data.location.country + ' - ' + data.location.region + ' - ' + data.location.city;
