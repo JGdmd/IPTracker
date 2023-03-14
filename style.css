@@ -181,9 +181,39 @@ input {
   line-height: 150%;
   letter-spacing: 2px;
 }
+@media (max-width: 767px) {
+  .author {
+    display: block;
+    width: 300px;
+    padding-left: 10px;
+    background-color: white;
+    position: fixed;
+    bottom: -15px;
+    left: 0px;
+    z-index: 1;
+    font-size: 0.8rem;
+    color: black;
+    transition: all ease 0.5s;
+  }
+}
 .author a {
   color: black;
   font-weight: 800;
+}
+
+.left {
+  left: -285px;
+}
+
+.arrow {
+  position: absolute;
+  right: 10px;
+  top: 28%;
+}
+@media (min-width: 768px) {
+  .arrow {
+    display: none;
+  }
 }
 
 .bar {

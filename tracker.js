@@ -11,6 +11,8 @@ let header = document.querySelector('header');
 let infoAddress = document.querySelector('.info-address');
 let cross = document.getElementById('cross');
 let tokenPublic = "pk.eyJ1IjoiZGV2ZXhwbG9yaXMiLCJhIjoiY2xmNWllbjltMWNtazNybGp0OWd5MWpoaiJ9.EB5SRwYcg5M_gbfHF5eVPA";
+let arrow = document.querySelector('.arrow');
+let authors = document.querySelector('.author');
 
 async function FetchApi(url) {
     if(url !== apiOnLoad) {
@@ -87,4 +89,8 @@ form.addEventListener('submit',(e) => {
 cross.addEventListener('click', () => {
     infoAddress.classList.toggle('visible');
     infoAddress.classList.toggle("invisible");
+})
+
+arrow.addEventListener('click', () => {
+    authors.classList.toggle('left');
 })
