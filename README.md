@@ -16,7 +16,7 @@ This is a solution to the [IP address tracker challenge on Frontend Mentor](http
 ## Overview
 ### Links
 
-- Solution URL: [Add solution URL here](https://IpAddressTracker.netlify.app)
+- Solution URL: [Add solution URL here](merry-naiad-16e943.netlify.app)
 
 ## My process
 
