@@ -1,18 +1,18 @@
-let button = document.getElementById('button');
-let inputIp = document.getElementById('ipInput');
-let apiAsk = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX';
-let apiOnLoad = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&ipAddress=8.8.8.8';
-let ip = document.getElementById('ip');
-let locationIp = document.getElementById('location');
-let timezone = document.getElementById('timezone');
-let isp = document.getElementById('isp');
-let form = document.querySelector('form');
-let header = document.querySelector('header');
-let infoAddress = document.querySelector('.info-address');
-let cross = document.getElementById('cross');
-let tokenPublic = "pk.eyJ1IjoiZGV2ZXhwbG9yaXMiLCJhIjoiY2xmNWllbjltMWNtazNybGp0OWd5MWpoaiJ9.EB5SRwYcg5M_gbfHF5eVPA";
-let arrow = document.querySelector('.arrow');
-let authors = document.querySelector('.author');
+const button = document.getElementById('button');
+const inputIp = document.getElementById('ipInput');
+const apiAsk = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX';
+const apiOnLoad = 'https://geo.ipify.org/api/v2/country,city?apiKey=at_krAgkVfXkGjs1FhIXlhUjKCk3qexX&ipAddress=8.8.8.8';
+const ip = document.getElementById('ip');
+const locationIp = document.getElementById('location');
+const timezone = document.getElementById('timezone');
+const isp = document.getElementById('isp');
+const form = document.querySelector('form');
+const header = document.querySelector('header');
+const infoAddress = document.querySelector('.info-address');
+const cross = document.getElementById('cross');
+const tokenPublic = "pk.eyJ1IjoiZGV2ZXhwbG9yaXMiLCJhIjoiY2xmNWllbjltMWNtazNybGp0OWd5MWpoaiJ9.EB5SRwYcg5M_gbfHF5eVPA";
+const arrow = document.querySelector('.arrow');
+const authors = document.querySelector('.author');
 
 async function FetchApi(url) {
     if(url !== apiOnLoad) {
@@ -49,40 +49,40 @@ async function SearchIp(url = '') {
     fetch(geocoding)
         .then(responses => responses.json())
         .then(city => {
-            let array = {'longitude' : city.features[0].center[0]};
-            array.latitude = city.features[0].center[1];
+            let gpsCoordinates = {
+                'longitude' : city.features[0].center[0],
+                'latitude' : city.features[0].center[1]
+            };
             let map = L.map('map', {
                 zoomControl: false
-            }).setView([array.latitude, array.longitude],10);
+            }).setView([gpsCoordinates.latitude, gpsCoordinates.longitude],10);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
-            L.marker([array.latitude, array.longitude]).addTo(map);
-            L.circle([array.latitude, array.longitude], {radius: 10000}).addTo(map);
+            L.marker([gpsCoordinates.latitude, gpsCoordinates.longitude]).addTo(map);
+            L.circle([gpsCoordinates.latitude, gpsCoordinates.longitude], {radius: 10000}).addTo(map);
         });
+}
+
+function returnMap(map) {
+    if(map != null) {
+        map.remove();
+        let divMap = document.createElement('div');
+        divMap.id = 'map';
+        header.after(divMap);
+    }
 }
 
 window.addEventListener('load', () => {
     SearchIp(apiOnLoad)
 })
 button.addEventListener('click', () => {
-    if(map != null) {
-        map.remove();
-        let divMap = document.createElement('div');
-        divMap.id = 'map';
-        header.after(divMap);
-    }
+    returnMap(map)
     SearchIp()
 })
 form.addEventListener('submit',(e) => {
-    if(map != null) {
-        map.remove();
-        let divMap = document.createElement('div');
-        divMap.id = 'map';
-        header.after(divMap);
-    }
-    e.preventDefault();
+    returnMap(map)
     SearchIp();
 })
 
